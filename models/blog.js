@@ -1,14 +1,11 @@
-import { Schema as _Schema, model } from 'mongoose';
-const Schema = _Schema;
+//mongoose: is a mongodb object modeling for node.js
+import { Schema, model } from 'mongoose';
 
-function main() {
-    const blogSchema = new Schema({
-        title: String,
-        description: String,
-    });
+const blogSchema = new Schema({
+    title: String,
+    description: String,
+});
 
-    const Blog = model('blog', blogSchema);
-    module.exports = Blog;
-}
+const Blog = model('blog', blogSchema);
 
-main();
+export default Blog;
