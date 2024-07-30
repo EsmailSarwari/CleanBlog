@@ -1,12 +1,11 @@
 import express from 'express';
-import connect from 'mongoose';
-const app = express();
-import 'dotenv/config';
-
-// import contollers
-import * as blogController from './controllers/blogController.js';
-import * as pagesController from './controllers/pagesController.js';
 import mongoose from 'mongoose';
+import 'dotenv/config';
+const app = express();
+
+// Routers
+import pageRoutes from './routes/pageRoutes.js';
+import blogRoutes from './routes/blogRoutes.js';
 
 //template engine
 app.set('view engine', 'ejs');
@@ -28,14 +27,9 @@ app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// blog routes
-app.post('/add_blog', blogController.createBlog);
-app.get('/', blogController.getAllBlogs);
-app.get('/blog/:id', blogController.getSingleBlogPage);
-
-//page routes
-app.get('/add_post', pagesController.getAddPostpage);
-app.get('/about', pagesController.getAboutPage);
+// Routes
+app.use('/', pageRoutes);
+app.use('/', blogRoutes);
 
 // Run Server
 app.listen(port, () => {
